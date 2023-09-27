@@ -11,7 +11,8 @@ public class WeaponDto {
     private Long id;
     private int sword;
     private int armor;
-    private int gold;
+    private int swordGold;
+    private int armorGold;
     private int lv;
 
     public WeaponDto() {}
@@ -19,16 +20,20 @@ public class WeaponDto {
     @Builder
     public WeaponDto(Weapon weapon) {
         this.id = weapon.getId();
-        this.gear = weapon.getGear();
-        this.gold = weapon.getGold();
+        this.sword = weapon.getSword();
+        this.armor = weapon.getArmor();
+        this.swordGold = weapon.getSwordGold();
+        this.armorGold = weapon.getArmorGold();
         this.lv = weapon.getLv();
     }
 
     public Weapon toEntity() {
         return Weapon.builder()
                 .id(id)
-                .gear(gear)
-                .gold(gold)
+                .sword(sword)
+                .armor(armor)
+                .swordGold(swordGold)
+                .armorGold(armorGold)
                 .lv(lv)
                 .build();
     }

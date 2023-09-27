@@ -7,17 +7,21 @@ import lombok.Getter;
 @Getter
 public class Weapon {
     private Long id;
-    private int gear;
-    private int gold;
+    private int sword;
+    private int armor;
+    private int swordGold;
+    private int armorGold;
     private int lv;
 
     public Weapon() {}
 
     @Builder
-    public Weapon(Long id,int gear, int gold, int lv) {
+    public Weapon(Long id, int sword, int armor, int swordGold, int armorGold, int lv) {
         this.id = id;
-        this.gear = gear;
-        this.gold = gold;
+        this.sword = sword;
+        this.armor = armor;
+        this.swordGold = swordGold;
+        this.armorGold = armorGold;
         this.lv = lv;
     }
 }
