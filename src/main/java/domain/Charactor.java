@@ -13,11 +13,14 @@ public class Charactor {
     private int def;
     private int speed;
     private int gold;
+    private int swordLv;
+    private int armorLv;
 
-    public Charactor() {}
+    public Charactor() {
+    }
 
     @Builder
-    public Charactor(Long id,String name, int maxHp, int hp, int atk, int def, int speed, int gold) {
+    public Charactor(Long id, String name, int maxHp, int hp, int atk, int def, int speed, int gold, int swordLv, int armorLv) {
         this.id = id;
         this.name = name;
         this.maxHp = maxHp;
@@ -26,5 +29,7 @@ public class Charactor {
         this.def = def;
         this.speed = speed;
         this.gold = gold;
+        this.swordLv = swordLv;
+        this.armorLv = armorLv;
     }
 }

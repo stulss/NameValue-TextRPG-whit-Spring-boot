@@ -15,6 +15,8 @@ public class CharactorDto {
     private int def;
     private int speed;
     private int gold;
+    private int swordLv;
+    private int armorLv;
 
     public CharactorDto() {}
 
@@ -27,6 +29,8 @@ public class CharactorDto {
         this.def = charactor.getDef();
         this.speed = charactor.getSpeed();
         this.gold = charactor.getGold();
+        this.swordLv = charactor.getSwordLv();
+        this.armorLv = charactor.getArmorLv();
     }
 
     public Charactor toEntity(){
@@ -38,6 +42,8 @@ public class CharactorDto {
                 .def(def)
                 .speed(speed)
                 .gold(gold)
+                .swordLv(swordLv)
+                .armorLv(armorLv)
                 .build();
     }
 }
