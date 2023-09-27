@@ -11,7 +11,7 @@ public class WeaponRepository {
     public WeaponRepository() {
         try {
             Class.forName("org.h2.Driver");
-            connection =DriverManager.getConnection(
+            connection = DriverManager.getConnection(
                     "jdbc:h2:mem:test",
                     "sa",
                     "");
@@ -20,12 +20,14 @@ public class WeaponRepository {
         }
     }
 
-    // -------------- <Create> --------------------------------
+    // -------------- < CREATE > --------------------------------
     public void createWeaponTable() {
         String tableSQL = "CREATE TABLE IF NOT EXISTS Weapon (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
-                "gear INT ARRAY NOT NULL," +
-                "gold INT ARRAY NOT NULL," +
+                "sword INT ARRAY NOT NULL," +
+                "armor INT ARRAY NOT NULL," +
+                "swordgold INT ARRAY NOT NULL," +
+                "armorgold INT ARRAY NOT NULL," +
                 "lv INT ARRAY NOT NULL)";
         try {
             try (PreparedStatement statement = connection.prepareStatement(tableSQL)) {
@@ -35,23 +37,4 @@ public class WeaponRepository {
             e.printStackTrace();
         }
     }
-
-    public void save (Weapon weapon) {
-        try {
-            if (weapon.getId() == null)
-            {
-                String insertSQL = "INSERT INTO Weapon (gear, gold, lv) VALUES (?,?,?)";
-                PreparedStatement insertStatement = connection.prepareStatement(insertSQL);
-                insertStatement.setInt(1, Weapon.);
-
-                insertStatement.execute();
-                insertStatement.close();
-            }
-
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-    }
-
-
-}
+        // ---------------< UPDATE > -----------------------------
