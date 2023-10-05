@@ -1,4 +1,4 @@
-package Repository;
+package repository;
 
 import domain.Charactor;
 
@@ -27,12 +27,14 @@ public class CharactorRepository {
         String tableSQL = "CREATE TABLE IF NOT EXISTS User (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
                 "name VARCHAR(255) NOT NULL," +
-                "maxHp VARCHAR(255) NOT NULL," +
-                "hp VARCHAR(255) NOT NULL," +
-                "atk VARCHAR(255) NOT NULL," +
-                "def VARCHAR(255) NOT NULL," +
-                "speed VARCHAR(255) NOT NULL," +
-                "gold VARCHAR(255) NOT NULL)";
+                "maxHp INT NOT NULL," +
+                "hp INT NOT NULL," +
+                "atk INT NOT NULL," +
+                "def INT NOT NULL," +
+                "speed INT NOT NULL," +
+                "gold INT NOT NULL)" +
+                "swordLv INT NOT NULL)" +
+                "armorLv INT NOT NULL)";
         try {
             try (PreparedStatement statement = connection.prepareStatement(tableSQL)) {
                 statement.execute();
@@ -45,15 +47,10 @@ public class CharactorRepository {
     public void save(Charactor charactor) {
 
         try{
-                String insertSQL = "INSERT INTO Charactor (name, maxHp, hp, atk, def, speed, gold) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String insertSQL = "INSERT INTO Charactor (name, maxHp, hp, atk, def, speed, gold, swordLv, armorLv) " +
+                        "VALUES (?, 30, 30, 2, 0, 10, 0, 0, 0)";
                 PreparedStatement insertStatement = connection.prepareStatement(insertSQL);
                 insertStatement.setString(1, charactor.getName());
-                insertStatement.setInt(2, charactor.getMaxHp());
-                insertStatement.setInt(3, charactor.getHp());
-                insertStatement.setInt(4, charactor.getAtk());
-                insertStatement.setInt(5, charactor.getDef());
-                insertStatement.setInt(6, charactor.getSpeed());
-                insertStatement.setInt(7, charactor.getGold());
 
                 insertStatement.execute();
                 insertStatement.close();
@@ -79,7 +76,9 @@ public class CharactorRepository {
                         resultSet.getInt("atk"),
                         resultSet.getInt("def"),
                         resultSet.getInt("speed"),
-                        resultSet.getInt("gold"));
+                        resultSet.getInt("gold"),
+                        resultSet.getInt("swordLv"),
+                        resultSet.getInt("armorLv"));
             }
 
             resultSet.close();
@@ -96,8 +95,8 @@ public class CharactorRepository {
         try {
             String updateSQL = "UPDATE Charactor SET name = ? WHERE id = ?";
             PreparedStatement updateStatement = connection.prepareStatement(updateSQL);
-            updateStatement.setString(1, charactor.getname());
-            updateStatement.setLong(2, charactor.getid());
+            updateStatement.setString(1, charactor.getName());
+            updateStatement.setLong(2, charactor.getId());
 
             updateStatement.executeUpdate();
             updateStatement.close();
@@ -106,86 +105,33 @@ public class CharactorRepository {
         }
     }
 
-    public void update_maxHp(Charactor charactor){
+    public void update(Charactor charactor) {
         try {
-            String updateSQL = "UPDATE Charactor SET maxHp = ? WHERE id = ?";
+            String updateSQL = "UPDATE Charactor SET name=?," +
+                    "maxHp=?," +
+                    "hp=?," +
+                    "atk=?," +
+                    "def=?," +
+                    "speed=?," +
+                    "gold=?," +
+                    "swordLV=?," +
+                    "armorLv=? " +
+                    "WHERE id=?";
             PreparedStatement updateStatement = connection.prepareStatement(updateSQL);
-            updateStatement.setInt(1, charactor.getmaxHp());
-            updateStatement.setLong(2, charactor.getid());
+            updateStatement.setString(1, charactor.getName());
+            updateStatement.setInt(2, charactor.getMaxHp());
+            updateStatement.setInt(3, charactor.getHp());
+            updateStatement.setInt(4, charactor.getAtk());
+            updateStatement.setInt(5, charactor.getDef());
+            updateStatement.setInt(6, charactor.getSpeed());
+            updateStatement.setInt(7, charactor.getGold());
+            updateStatement.setInt(8, charactor.getSwordLv());
+            updateStatement.setInt(9, charactor.getArmorLv());
+            updateStatement.setLong(10, charactor.getId());
 
             updateStatement.executeUpdate();
             updateStatement.close();
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void update_hp(Charactor charactor){
-        try{
-            String updateSQL = "UPDATE Charactor SET hp = ? WHERE id = ?";
-            PreparedStatement updateStatement = connection.prepareStatement(updateSQL);
-            updateStatement.setInt(1, charactor.gethp());
-            updateStatement.setLong(2, charactor.getid());
-
-            updateStatement.executeUpdate();
-            updateStatement.close();
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void update_atk(Charactor charactor){
-        try{
-            String updateSQL = "UPDATE Charactor SET atk = ? WHERE id = ?";
-            PreparedStatement updateStatement = connection.prepareStatement(updateSQL);
-            updateStatement.setInt(1, charactor.getatk());
-            updateStatement.setLong(2, charactor.getid());
-
-            updateStatement.executeUpdate();
-            updateStatement.close();
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void update_def(Charactor charactor){
-        try{
-            String updateSQL = "UPDATE Charactor SET def = ? WHERE id = ?";
-            PreparedStatement updateStatement = connection.prepareStatement(updateSQL);
-            updateStatement.setInt(1, charactor.getdef());
-            updateStatement.setLong(2, charactor.getid());
-
-            updateStatement.executeUpdate();
-            updateStatement.close();
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void update_gold(Charactor charactor){
-        try{
-            String updateSQL = "UPDATE Charactor SET gold = ? WHERE id = ?";
-            PreparedStatement updateStatement = connection.prepareStatement(updateSQL);
-            updateStatement.setInt(1, charactor.getgold());
-            updateStatement.setLong(2, charactor.getid());
-
-            updateStatement.executeUpdate();
-            updateStatement.close();
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void update_speed(Charactor charactor){
-        try{
-            String updateSQL = "UPDATE Charactor SET speed = ? WHERE id = ?";
-            PreparedStatement updateStatement = connection.prepareStatement(updateSQL);
-            updateStatement.setInt(1, charactor.getspeed());
-            updateStatement.setLong(2, charactor.getid());
-
-            updateStatement.executeUpdate();
-            updateStatement.close();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
