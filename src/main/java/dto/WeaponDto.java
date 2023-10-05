@@ -3,16 +3,16 @@ package dto;
 import domain.Weapon;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-
-@Data
+@Setter
+@Getter
 public class WeaponDto {
     private Long id;
-    private int sword;
-    private int armor;
-    private int swordGold;
-    private int armorGold;
+    private int gear;
+    private int gold;
+    private int itemId;
     private int lv;
 
     public WeaponDto() {}
@@ -20,20 +20,18 @@ public class WeaponDto {
     @Builder
     public WeaponDto(Weapon weapon) {
         this.id = weapon.getId();
-        this.sword = weapon.getSword();
-        this.armor = weapon.getArmor();
-        this.swordGold = weapon.getSwordGold();
-        this.armorGold = weapon.getArmorGold();
+        this.gear = weapon.getGear();
+        this.gold = weapon.getGold();
+        this.itemId = weapon.getItemId();
         this.lv = weapon.getLv();
     }
 
     public Weapon toEntity() {
         return Weapon.builder()
                 .id(id)
-                .sword(sword)
-                .armor(armor)
-                .swordGold(swordGold)
-                .armorGold(armorGold)
+                .gear(gear)
+                .gold(gold)
+                .itemId(itemId)
                 .lv(lv)
                 .build();
     }
