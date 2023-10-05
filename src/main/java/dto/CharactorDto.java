@@ -35,6 +35,7 @@ public class CharactorDto {
 
     public Charactor toEntity(){
         return Charactor.builder()
+                .id(id)
                 .name(name)
                 .maxHp(maxHp)
                 .hp(hp)

@@ -4,16 +4,26 @@ import domain.Charactor;
 import dto.CharactorDto;
 import repository.CharactorRepository;
 
-import java.util.List;
-
 public class PlayerStatusService {
 
     private CharactorRepository charactorRepository = null;
+    private WeaponService weaponService = null;
+    private PlayerBattleService playerBattleService = null;
 
-    public void HpChange(int cHp, Long id){
-        int hp = findById(id).getHp();
-        if (hp + cHp > findById(id).getMaxHp()){
-            hp = findById(id).getMaxHp();
+    public PlayerStatusService(){
+        charactorRepository = new CharactorRepository();
+        charactorRepository.createTable();
+        charactorRepository.initialize();
+
+
+    }
+
+    // ----------------------PlayerStatus------------------------------
+
+    public void HpChange(CharactorDto charactorDto,int cHp){
+        int hp = charactorDto.getHp();
+        if (hp + cHp > charactorDto.getMaxHp()){
+            hp = charactorDto.getMaxHp();
         }
         else if (hp + cHp > 0){
             hp += cHp;
@@ -22,23 +32,42 @@ public class PlayerStatusService {
             hp = 0;
         }
 
-        CharactorDto charactorDto = new CharactorDto();
         charactorDto.setHp(hp);
-
-        update_hp(charactorDto);
+        System.out.print(charactorDto.getName());
+        DialogReadService.getDialog("PrintHp");
+        System.out.println(charactorDto.getHp());
+        update(charactorDto);
     }
 
-    public boolean GoldChange(int cGold, Long id){
-        int gold = findById(id).getGold();
+    public boolean GoldChange(CharactorDto charactorDto,int cGold){
+        int gold = charactorDto.getGold();
         if (gold + cGold < 0){
+            DialogReadService.getDialog("PoorDialog");
             return false;
         }
         else{
-            CharactorDto charactorDto = new CharactorDto();
             charactorDto.setGold(gold + cGold);
-            update_gold(charactorDto);
+            update(charactorDto);
+            System.out.print(charactorDto.getName());
+            DialogReadService.getDialog("PrintGold");
+            System.out.println(charactorDto.getGold());
             return true;
         }
+    }
+
+    public void printStatus(){
+        Charactor user = findById(1L);
+        System.out.println("===========정보창============");
+        // System.out.println("ID : " + user.getId());
+        System.out.println("이름 : " + user.getName());
+        System.out.println("체력 : " + user.getHp() + " / " + user.getMaxHp());
+        System.out.println("공격력 : " + user.getAtk());
+        System.out.println("방어력 : " + user.getDef());
+        System.out.println("골드 : " + user.getGold());
+        // System.out.println("검 레벨 : " + user.getSwordLv());
+        // System.out.println("갑옷 레벨 : " + user.getArmorLv());
+        System.out.println("=============================");
+        System.out.println();
     }
 
     public void save(CharactorDto charactorDto){
@@ -49,33 +78,12 @@ public class PlayerStatusService {
         return charactorRepository.findById(id);
     }
 
+    public void update(CharactorDto charactorDto){
+        charactorRepository.update(charactorDto.toEntity());
+    }
+
     public void update_name(CharactorDto charactorDto){
         charactorRepository.update_name(charactorDto.toEntity());
-    }
-
-    public void update_maxHp(CharactorDto charactorDto){
-        charactorRepository.update_maxHp(charactorDto.toEntity());
-    }
-
-    public void update_hp(CharactorDto charactorDto){
-        charactorRepository.update_hp(charactorDto.toEntity());
-
-    }
-
-    public void update_atk(CharactorDto charactorDto){
-        charactorRepository.update_atk(charactorDto.toEntity());
-    }
-
-    public void update_def(CharactorDto charactorDto){
-        charactorRepository.update_def(charactorDto.toEntity());
-    }
-
-    public void update_gold(CharactorDto charactorDto){
-        charactorRepository.update_gold(charactorDto.toEntity());
-    }
-
-    public void update_speed (CharactorDto charactorDto){
-        charactorRepository.update_speed(charactorDto.toEntity());
     }
 
 }
