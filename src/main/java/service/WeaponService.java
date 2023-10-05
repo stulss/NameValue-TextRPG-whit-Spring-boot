@@ -27,7 +27,7 @@ public class WeaponService {
         Weapon weapon = weaponRepository.findByItemIdLv(0, charactorDto.toEntity().getSwordLv() + 1);
         if (weapon == null) {
             DialogReadService.getDialog("BSmithCannotDialog");
-        } else if (GoldChange(weapon.getGold())) {
+        } else if (playerStatusService.GoldChange(charactorDto,weapon.getGold())) {
             CharactorDto temp = new CharactorDto(charactorDto.toEntity());
             temp.setAtk(weapon.getGear());
             UpdateAtkDef(temp);
@@ -42,7 +42,7 @@ public class WeaponService {
         Weapon weapon = weaponRepository.findByItemIdLv(1, charactorDto.toEntity().getArmorLv() + 1);
         if (weapon == null) {
             DialogReadService.getDialog("BsmithCannotDialog");
-        } else if (GoldChange(weapon.getGold())) {
+        } else if (playerStatusService.GoldChange(charactorDto,weapon.getGold())) {
             CharactorDto temp = new CharactorDto(charactorDto.toEntity());
             temp.setDef(weapon.getGear());
             UpdateAtkDef(temp);
