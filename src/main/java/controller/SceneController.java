@@ -16,6 +16,7 @@ public class SceneController {
     private PlayerStatusService playerStatusService = null;
     private PlayerBattleService playerBattleService = null;
     private WeaponService weaponService = null;
+    private WeaponController weaponController = null;
 
     public SceneController(){
         playerStatusService = new PlayerStatusService();
@@ -23,7 +24,8 @@ public class SceneController {
         weaponService = new WeaponService(playerStatusService);
         inVillageController = new InVillageController(playerStatusService);
         battleController = new BattleController(playerStatusService,playerBattleService);
-        gameController = new GameController(playerStatusService,weaponService);
+        gameController = new GameController(playerStatusService);
+        weaponController = new WeaponController(playerStatusService,weaponService);
         Initialize();
     }
 
@@ -76,18 +78,15 @@ public class SceneController {
                     choice = inVillageController.pub();
                     break;
                 case 3:
-                    choice = inVillageController.restaurant();
+                    choice = weaponController.SmithMenu();
                     break;
                 case 4:
-                    choice = gameController.smith();
-                    break;
-                case 5:
                     choice = battleController.dungeon();
                     break;
-                case 6:
+                case 5:
                     choice = battleController.war();
                     break;
-                case 7:
+                case 6:
                     choice = playerBattleService.nextMonster();
                 default:
                     break;
