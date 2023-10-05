@@ -6,18 +6,11 @@ import repository.CharactorRepository;
 import repository.WeaponRepository;
 
 public class WeaponService {
-    private CharactorRepository charactorRepository = null;
     private WeaponRepository weaponRepository = null;
     private PlayerStatusService playerStatusService = null;
-    private CharactorDto charactorDto = null;
-    public void UpdateAtkDef(CharactorDto charactorDto){
-        charactorRepository.update(charactorDto.toEntity());
-    }
 
     public WeaponService() {
-        charactorDto = new CharactorDto();
         playerStatusService = new PlayerStatusService();
-        charactorRepository = new CharactorRepository();
         weaponRepository = new WeaponRepository();
         weaponRepository.createWeaponTable();
         weaponRepository.weaponInitialize();
@@ -30,11 +23,11 @@ public class WeaponService {
         } else if (playerStatusService.GoldChange(charactorDto,weapon.getGold())) {
             CharactorDto temp = new CharactorDto(charactorDto.toEntity());
             temp.setAtk(weapon.getGear());
-            UpdateAtkDef(temp);
+            temp.setSwordLv(weapon.getLv());
+            playerStatusService.update(charactorDto);
             DialogReadService.getDialog("SmithSwordUpgradeDialog");
             System.out.print(playerStatusService.findById(1L).getAtk());
             DialogReadService.getDialog("LineDialog");
-            weaponRepository.weaponUpdate(weapon);
         }
     }
 
@@ -45,11 +38,11 @@ public class WeaponService {
         } else if (playerStatusService.GoldChange(charactorDto,weapon.getGold())) {
             CharactorDto temp = new CharactorDto(charactorDto.toEntity());
             temp.setDef(weapon.getGear());
-            UpdateAtkDef(temp);
+            temp.setArmorLv(weapon.getLv());
+            playerStatusService.update(charactorDto);
             DialogReadService.getDialog("SmithArmorUpgradeDialog");
             System.out.print(playerStatusService.findById(1L).getDef());
             DialogReadService.getDialog("LineDialog");
-            weaponRepository.weaponUpdate(weapon);
         }
     }
 }
