@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class DialogReadService {
 
-    public String getDialog(String key) {
+    public static String getDialog(String key) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             Map<String, String> dialogMap =
