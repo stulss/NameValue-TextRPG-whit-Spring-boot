@@ -1,6 +1,7 @@
 package service;
 
 import domain.Weapon;
+import dto.CharactorDto;
 import repository.WeaponRepository;
 
 public class WeaponService {
@@ -19,7 +20,7 @@ public class WeaponService {
     }
 
     public void UpgradeSword(CharactorDto charactorDto) {
-        Weapon weapon = weaponRepository.findByItemIdLv(0, charactorDto.toEntity().getSword() + 1);
+        Weapon weapon = weaponRepository.findByItemIdLv(0, charactorDto.toEntity().getSwordLv() + 1);
         if (weapon == null) {
             DialogReadService.getDialog("BSmithCannotDialog");
         } else if (GoldChange(weapon.getGold())) {
