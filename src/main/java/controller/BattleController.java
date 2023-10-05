@@ -10,13 +10,10 @@ import java.util.Scanner;
 
 public class BattleController {
 
-    private Scanner scanner = null;
     private PlayerBattleService playerBattleService = null;
     private PlayerStatusService playerStatusService = null;
-    CharactorDto player = new CharactorDto(playerStatusService.findById(1L));
 
     public BattleController(PlayerStatusService playerStatusService,PlayerBattleService playerBattleService) {
-        scanner = new Scanner(System.in);
         this.playerBattleService = playerBattleService;
         this.playerStatusService = playerStatusService;
     }
@@ -25,10 +22,7 @@ public class BattleController {
         DialogReadService.getDialog("WarMenuDialog");
         DialogReadService.getDialog("SelectMenuDialog");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
-        switch (choice) {
+        switch (SceneController.scan()) {
             case 1: {
                 CharactorDto player = new CharactorDto(playerStatusService.findById(1L));
                 CharactorDto monster = new CharactorDto(playerStatusService.findById(2L));
@@ -55,10 +49,7 @@ public class BattleController {
         DialogReadService.getDialog("DungeonMenuDialog");
         DialogReadService.getDialog("SelectMenuDialog");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
-        switch (choice) {
+        switch (SceneController.scan()) {
             case 1: {
                 DialogReadService.getDialog("EnterGoblinDialog");
                 playerBattleService.dungeonMaker(new int[] {0,0,1},30);
