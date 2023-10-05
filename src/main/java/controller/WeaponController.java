@@ -3,27 +3,25 @@ package controller;
 import domain.Weapon;
 import dto.CharactorDto;
 import service.DialogReadService;
+import service.PlayerStatusService;
 import service.WeaponService;
 
 public class WeaponController {
     private WeaponService weaponService = null;
-    private CharactorDto charactorDto = null;
-    private InVillageController inVillageController = null;
-    private DialogReadService dialogReadService = new DialogReadService();
-
-    public WeaponController() {
-        charactorDto = new CharactorDto();
-        weaponService = new WeaponService();
-        inVillageController = new InVillageController();
+    private PlayerStatusService playerStatusService = null;
+    public WeaponController(PlayerStatusService playerStatusService,WeaponService weaponService) {
+        this.playerStatusService = playerStatusService;
+        this.weaponService = weaponService;
     }
 
     public void SmithMenu() {
-        String smithControllerDialog = dialogReadService.getDialog("SmithBackGround");
-        String smithMenuDialog = dialogReadService.getDialog("SmithUpgradeMenu");
+        String smithControllerDialog = DialogReadService.getDialog("SmithBackGround");
+        String smithMenuDialog = DialogReadService.getDialog("SmithUpgradeMenu");
+        CharactorDto charactorDto = new CharactorDto(playerStatusService.findById(1L));
         switch (SceneController.scan()) {
-            case 1:
+            case 1: {
                 weaponService.UpgradeSword(charactorDto);
-                break;
+            }   break;
             case 2:
                 weaponService.UpgradeArmor(charactorDto);
                 break;
@@ -31,7 +29,7 @@ public class WeaponController {
                 inVillageController.selective();
                 break;
             default:
-                smithControllerDialog = dialogReadService.getDialog("WrongDialog");
+                smithControllerDialog = DialogReadService.getDialog("WrongDialog");
                 SmithMenu();
         }
         if (smithControllerDialog != null) {
