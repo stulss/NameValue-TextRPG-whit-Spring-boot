@@ -8,6 +8,7 @@ import service.WeaponService;
 public class WeaponController {
     private WeaponService weaponService = null;
     private CharactorDto charactorDto = null;
+    private
     private DialogReadService dialogReadService = new DialogReadService();
 
     public WeaponController() {
@@ -18,7 +19,7 @@ public class WeaponController {
     public void SmithMenu() {
         String smithControllerDialog = dialogReadService.getDialog("SmithBackGround");
         String smithMenuDialog = dialogReadService.getDialog("SmithUpgradeMenu");
-        switch (scanner.scan) {
+        switch (SceneController.scan()) {
             case 1:
                 weaponService.UpgradeSword(charactorDto);
                 break;
@@ -26,7 +27,7 @@ public class WeaponController {
                 weaponService.UpgradeArmor(charactorDto);
                 break;
             case 3:
-                InVillageController.selective();
+                inVillageController.selective();
                 break;
             default:
                 smithControllerDialog = dialogReadService.getDialog("WrongDialog");
