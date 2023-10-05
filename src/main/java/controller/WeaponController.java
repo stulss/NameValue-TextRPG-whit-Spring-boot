@@ -8,12 +8,13 @@ import service.WeaponService;
 public class WeaponController {
     private WeaponService weaponService = null;
     private CharactorDto charactorDto = null;
-    private
+    private InVillageController inVillageController = null;
     private DialogReadService dialogReadService = new DialogReadService();
 
     public WeaponController() {
         charactorDto = new CharactorDto();
         weaponService = new WeaponService();
+        inVillageController = new InVillageController();
     }
 
     public void SmithMenu() {
