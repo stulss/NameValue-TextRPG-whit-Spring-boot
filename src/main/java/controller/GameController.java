@@ -3,6 +3,10 @@ package controller;
 import service.DialogReadService;
 
 public class GameController {
+    private InVillageController inVillageController = null;
+    public GameController(){
+        inVillageController = new InVillageController();
+    }
 
     private DialogReadService dialogReadService = new DialogReadService();
 
@@ -20,7 +24,7 @@ public class GameController {
             String gameControllerDialog = dialogReadService.getDialog("GameStoryMenu");
             switch (SceneController.scan()) {
                 case 1:
-                    InVillageController.selective();
+                    inVillageController.selective();
                     break;
                 case 2:
                     break;
