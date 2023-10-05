@@ -1,85 +1,71 @@
 package controller;
 
-import java.util.*;
-
 import dto.CharactorDto;
 import service.DialogReadService;
 import service.PlayerStatusService;
 
 public class InVillageController {
 
-    private PlayerStatusService playerStatusService = null;
-    private CharactorDto charactorDto = null;
-    private WeaponController weaponController = null;
+    private PlayerStatusService playerStatusService;
 
-    public InVillageController(){
-        playerStatusService = new PlayerStatusService();
-        weaponController = new WeaponController();
-        charactorDto = new CharactorDto();
+    
+
+    public InVillageController(PlayerStatusService playerStatusService){
+        this.playerStatusService = playerStatusService;
     }
 
-    private final DialogReadService dialogReadService = new DialogReadService();
-
-
-    public void selective(){
+    public int selective(){
         DialogReadService.getDialog("VillageBackGround");
         DialogReadService.getDialog("VillageMenuDialog");
         DialogReadService.getDialog("SelectMenuDialog");
 
         switch(SceneController.scan()){
             case 1:
-                Pub();
-                break;
+                return 2;
             case 2:
-                weaponController.SmithMenu();
-                break;
+                return 3;
             case 3:
-                break;
+                return 4;
             default:
                 DialogReadService.getDialog("WrondDialog");
+                return 1;
         }
     }
 
-    public void Pub(){
+    public int Pub(){
         DialogReadService.getDialog("PubBackGround");
         DialogReadService.getDialog("PubMenuDialog");
         DialogReadService.getDialog("SelectMenuDialog");
-        CharactorDto player = new CharactorDto(playerStatusService.findById(1L));
 
-        int cGold, cHp;
+        CharactorDto player = new CharactorDto(playerStatusService.findById(1L));
 
         switch(SceneController.scan()){
             case 1:
-                cGold = -3;
-                cHp = 5;
-                playerStatusService.GoldChange(player,cGold);
-                playerStatusService.HpChange(player,cHp);
-
-                break;
+                if(playerStatusService.GoldChange(player,-3)){
+                    playerStatusService.HpChange(player,5);
+                }
+                return 2;
             case 2:
-                cGold = -6;
-                cHp = 10;
-                playerStatusService.GoldChange(player,cGold);
-                playerStatusService.HpChange(player,cHp);
-
-                break;
+                if(playerStatusService.GoldChange(player,-6)){
+                    playerStatusService.HpChange(player,10);
+                }
+                return 2;
             case 3:
-                cGold = -9;
-                cHp = 15;
-                playerStatusService.GoldChange(player,cGold);
-                playerStatusService.HpChange(player,cHp);
-                break;
+                if(playerStatusService.GoldChange(player,-9)){
+                    playerStatusService.HpChange(player,15);
+                }
+                return 2;
             case 4:
-                cGold = -15;
-                cHp = 30;
-                playerStatusService.GoldChange(player,cGold);
-                playerStatusService.HpChange(player,cHp);
-                break;
+                if(playerStatusService.GoldChange(player,-15)){
+                    playerStatusService.HpChange(player,30);
+                }
+                return 2;
             case 5:
                 DialogReadService.getDialog("GoBackTownDialog");
-                break;
+                return 1;
             default:
                 DialogReadService.getDialog("WrondDialog");
+                return 2;
         }
     }
 
