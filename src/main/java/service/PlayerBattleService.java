@@ -22,41 +22,34 @@ public class PlayerBattleService {
         dungeonGold = 0;
     }
 
-    public void attackSquence(CharactorDto player, CharactorDto enemy) {
-        if (player.getSpeed() > enemy.getSpeed()) {
-            attack(player, enemy);
-            if (enemy.getHp() > 0)
-                attack(enemy, player);
-        }
-        else {
-            attack(enemy, player);
-            if (player.getHp() > 0)
-                attack(player, enemy);
-        }
+    public void attackSquence(CharactorDto player, CharactorDto enemy){
+        if(player.getSpeed() > enemy.getSpeed())
+            action(player,enemy);
+        else
+            action(enemy,player);
     }
 
-    public void attack(CharactorDto player, CharactorDto enemy) {
-        int dmg = player.getAtk() - enemy.getDef();
-        if (dmg < 1) {dmg = 1;}
-        if (enemy.getHp() > dmg) {
-            enemy.setHp(enemy.getHp() - dmg);
-        }
-        else{
-            enemy.setHp(0);
-        }
-        attackMessage(player,enemy,dmg);
+    public void action(CharactorDto player,CharactorDto enemy){
+        turn(player,enemy, attack(player,enemy));
+        if (enemy.getHp() > 0)
+            turn(enemy,player, attack(enemy,player));
     }
 
-    public void deffence(CharactorDto player, CharactorDto enemy){
-        int dmg = (enemy.getAtk() - player.getDef() + 1) / 2;
-        if (dmg < 1) {dmg = 1;}
-        if (player.getHp() > dmg) {
-            player.setHp(player.getHp() - dmg);
-        }
-        else{
-            player.setHp(0);
-        }
-        attackMessage(player,enemy,dmg);
+    public void turn(CharactorDto attacker,CharactorDto enemy,int damage){
+        attackMessage(attacker,enemy,damage);
+        playerStatusService.HpChange(enemy,damage);
+    }
+
+    public int attack(CharactorDto attacker, CharactorDto enemy) {
+        int damage = attacker.getAtk() - enemy.getDef();
+        if(damage < 1) damage = 1;
+        return - damage;
+    }
+
+    public int deffence(CharactorDto enemy, CharactorDto deffencer){
+        int damage = (enemy.getAtk() - deffencer.getDef() + 1) / 2;
+        if(damage < 1) damage = 1;
+        return - damage;
     }
 
     public void attackMessage(CharactorDto attacker,CharactorDto enemy,int damage){
@@ -67,6 +60,7 @@ public class PlayerBattleService {
         System.out.print(damage);
         DialogReadService.getDialog("AttackDialog3");
     }
+
     public int dead() {
         if (playerStatusService.findById(1L).getHp() == 0) {
             System.out.print(playerStatusService.findById(1L).getName());
