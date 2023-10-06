@@ -6,21 +6,17 @@ import service.PlayerStatusService;
 import service.WeaponService;
 
 public class GameController {
-    //private InVillageController inVillageController = null;
     private PlayerStatusService playerStatusService = null;
 
     public GameController(PlayerStatusService playerStatusService) {
-        //inVillageController = new InVillageController(playerStatusService);
         this.playerStatusService = playerStatusService;
     }
 
-    private DialogReadService dialogReadService = new DialogReadService();
-
     public void GameStory() {
-        dialogReadService.gameStoryDialog();
+        DialogReadService.getDialog("GameStoryDialog");
         boolean keep = true;
         while (keep) {
-            dialogReadService.gameStoryMenu();
+            DialogReadService.getDialog("GameStoryMenu");
             switch (SceneController.scan()) {
                 case 1:
                     //inVillageController.selective();
@@ -33,7 +29,7 @@ public class GameController {
                     System.exit(0);
                     break;
                 default:
-                    dialogReadService.wrongDialog();
+                    DialogReadService.getDialog("WrongDialog");
             }
         }
     }

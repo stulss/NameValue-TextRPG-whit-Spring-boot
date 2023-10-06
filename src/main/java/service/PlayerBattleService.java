@@ -12,7 +12,6 @@ import java.util.List;
 
 public class PlayerBattleService {
 
-    DialogReadService dialogReadService = new DialogReadService();
     private PlayerStatusService playerStatusService = null;
     private List<Integer> monsters;
     private int dungeonGold;
@@ -45,10 +44,7 @@ public class PlayerBattleService {
         else{
             enemy.setHp(0);
         }
-        System.out.println(player.getName() + "(이)가 " + enemy.getName() + "에게 "
-                + dmg + "만큼 데미지를 주었습니다. ");
-        System.out.println(enemy.getName() + "의 현재 HP : " + enemy.getHp());
-
+        attackMessage(player,enemy,dmg);
     }
 
     public void deffence(CharactorDto player, CharactorDto enemy){
@@ -60,26 +56,33 @@ public class PlayerBattleService {
         else{
             player.setHp(0);
         }
-        System.out.println(enemy.getName() + "(이)가 " + player.getName() + "에게 "
-                + dmg + "만큼 데미지를 주었습니다. ");
+        attackMessage(player,enemy,dmg);
     }
 
+    public void attackMessage(CharactorDto attacker,CharactorDto enemy,int damage){
+        System.out.print(attacker.getName());
+        DialogReadService.getDialog("AttackDialog1");
+        System.out.print(enemy.getName());
+        DialogReadService.getDialog("AttackDialog2");
+        System.out.print(damage);
+        DialogReadService.getDialog("AttackDialog3");
+    }
     public int dead() {
         if (playerStatusService.findById(1L).getHp() == 0) {
-            System.out.println(playerStatusService.findById(1L).getName()+"의 현재 HP는 0");
             System.out.print(playerStatusService.findById(1L).getName());
-            dialogReadService.badEnding();
+            DialogReadService.getDialog("BadEnding");
             System.exit(0);
         } else if (playerStatusService.findById(2L).getHp() > 0) {
             return 5;
         }
-        System.out.print(playerStatusService.findById(2L).getName()+"(이)가 죽었습니다.");
+        System.out.print(playerStatusService.findById(2L).getName());
+        DialogReadService.getDialog("MobDeadDialog");
         return 6;
     }
 
     public int runAway() {
         if (playerStatusService.findById(2L).getName().equals("리치왕 아서스 메놀드")) {
-            System.out.println("도망칠 수 없음");
+            DialogReadService.getDialog("LichRunAwayDialog");
             return 5;
         } else {
             return 1;
@@ -103,18 +106,18 @@ public class PlayerBattleService {
     public int nextMonster() {
         if (monsters.isEmpty()) {
             if (playerStatusService.findById(2L).getName().equals("리치왕 아서스 메놀드")) {
-                dialogReadService.trueEnding();
-                //DialogReadService.getDialog("TrueEnding");
+                DialogReadService.getDialog("TrueEnding");
                 System.exit(0);
             }
             System.out.print(dungeonGold);
-            dialogReadService.earnGold();
+            DialogReadService.getDialog("EarnGold");
             playerStatusService.GoldChange(new CharactorDto(playerStatusService.findById(1L)), dungeonGold);
+            DialogReadService.getDialog("VillageBackGround");
             return 1;
         }
         updateMonster(monsters.get(0));
         System.out.print(playerStatusService.findById(2L).getName());
-        dialogReadService.mobEntranceDialog();
+        DialogReadService.getDialog("MobEntranceDialog");
         monsters.remove(0);
         return 5;
 
