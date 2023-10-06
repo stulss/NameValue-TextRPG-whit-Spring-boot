@@ -70,16 +70,16 @@ public class PlayerBattleService {
             DialogReadService.getDialog("BadEnding");
             System.exit(0);
         } else if (playerStatusService.findById(2L).getHp() > 0) {
-            return 6;
+            return 5;
         }
         System.out.print(playerStatusService.findById(2L).getName()+"(이)가 죽었습니다.");
-        return 7;
+        return 6;
     }
 
     public int runAway() {
         if (playerStatusService.findById(2L).getName().equals("리치왕 아서스 메놀드")) {
             System.out.println("도망칠 수 없음");
-            return 6;
+            return 5;
         } else {
             return 1;
         }
@@ -114,7 +114,7 @@ public class PlayerBattleService {
         System.out.print(playerStatusService.findById(2L).getName());
         DialogReadService.getDialog("MobEntranceDialog");
         monsters.remove(0);
-        return 6;
+        return 5;
 
     }
 
@@ -124,7 +124,4 @@ public class PlayerBattleService {
         }
         dungeonGold = gold;
     }
-
-
-
 }

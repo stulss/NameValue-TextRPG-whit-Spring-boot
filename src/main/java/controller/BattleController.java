@@ -42,7 +42,7 @@ public class BattleController {
                 DialogReadService.getDialog("WrondDialog");
                 break;
         }
-        return 6;
+        return 5;
     }
 
     public int dungeon() {
@@ -80,6 +80,7 @@ public class BattleController {
                 DialogReadService.getDialog("WrondDialog");
                 break;
         }
-        return 6;
+        return 5;
     }
 }
+
