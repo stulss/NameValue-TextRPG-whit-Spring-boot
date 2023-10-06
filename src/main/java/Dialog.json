@@ -17,15 +17,19 @@
     "'Frostmourne Sword'\n",
     "\n",
     "1. 게임 시작\n",
-    "'이 외의 숫자를 입력하면 게임이 종료됩니다.'"
-],
-  "InputName": ["이름을 입력해주세요.\n"],
-  "WrongDialog": ["잘못 입력 하였습니다.\n"],
+    "'이외의 숫자를 입력하면 게임이 종료됩니다.'\n"
+  ],
+
+
+  "InputName": ["이름을 입력해주세요: "],
+  "WrondDialog": ["잘못 입력 하였습니다.\n"],
+  "ErrorDelayDialog": ["지연에 문제가 생겼습니다. 다시 시도 해주세요.\n"],
   "SelectMenuDialog": [
     "\n",
     "메뉴를 선택해주세요: "
   ],
-  "ErrorDelayDialog": ["지연에 문제가 생겼습니다. 다시 시도 해주세요.\n"],
+
+
   "GameStoryDialog": [
     "==================== 게임 배경 =====================\n",
     "이 게임은 가상의 판타지 중세시대를 배경으로 이루어져 있습니다.\n",
@@ -40,12 +44,55 @@
     "비록 지금은 닳고 낡아빠진 볼품없는 검으로 밖에 보이지 않지만..\n",
     "지금 당장은 이 검이 유일한 희망인것 같다.\n",
     "어서 바삐 움직여야 한다.\n",
-    ""
+    "\n"
   ],
   "GameStoryMenu": [
     "1. 다음\n",
     "2. 종료\n"
   ],
+
+  "VillageBackGround":[
+    "\n",
+    "마을 사람들이 부지런히 움직이고 있다.\n"
+  ],
+  "VillageMenuDialog": [
+    "\n",
+    "1.여관으로 이동\n",
+    "2.대장간으로 이동\n",
+    "3.던전으로 이동\n",
+    "이동할 장소를 선택해 주세요.\n"
+  ],
+
+
+  "PubBackGround": [
+    "\n",
+    "맥주잔이 부딪히는 소리, 바드의 악기 연주 소리가 들린다.\n"
+  ],
+  "PubMenuDialog": [
+    "\n",
+    "1. 음식 주문하기 ( 음식을 이용해 체력을 회복하세요.)\n",
+    "2. 방을 빌려 침대에서 잠에 들기 ( -15 Gold )\n",
+    "3. 마을로 돌아가기\n"
+  ],
+  "PubSleep": ["낡은 침대이지만 포근함만큼은 집을 생각나게 한다.\n"],
+  "GoBackTownDialog": ["마을로 돌아간다.\n"],
+  "PrintHp": ["의 현재 Hp: "],
+
+
+  "RestaurantBackGround": [
+    "\n",
+    "여관 주인 앞 바 테이블에 앉았다.\n"
+  ],
+  "FoodMenuDialog": [
+    "\n",
+    "1. 빵 ( -3 Gold ) / ( +5 HP )\n",
+    "2. 스튜 ( -6 Gold ) / ( +10 HP )\n",
+    "3. 돼지고기 통구이 ( -9 Gold ) / ( +15 HP )\n",
+    "4. 취소\n"
+  ],
+  "BreadDialog": ["퍽퍽하고 단순한 밀빵이다.\n"],
+  "StewDialog": ["옥수수가 들어간 따뜻한 스튜다.\n"],
+  "TurkeyDialog": ["머리 없이 통으로 구워진 칠면조다.\n"],
   "PoorDialog": [
     "\n",
     "===============\n",
@@ -53,70 +100,46 @@
     "===============\n",
     "\n"
   ],
-  "VillageBackGround":[
-    "\n",
-    "마을 사람들이 부지런히 움직이고 있다.\n",
-    "\n"
-  ],
-  "VillageMenuDialog": [
-    "1.여관으로 이동\n",
-    "2.대장간으로 이동\n",
-    "3.던전으로 이동\n",
-    "이동할 장소를 선택해 주세요.\n"
-  ],
-  "PubBackGround": [
-  "\n",
-  "맥주잔이 부딪히는 소리, 바드의 악기 연주 소리가 들린다.\n",
-  "\n"
-],
-  "PubMenuDialog": [
-    "1. 빵 ( -3 Gold ) / ( +5 HP )\n",
-    "2. 스튜 ( -6 Gold ) / ( +10 HP )\n",
-    "3. 돼지고기 통구이 ( -9 Gold ) / ( +15 HP )\n",
-    "4. 방을 빌려 침대에서 잠에 들기 ( -15 Gold )\n",
-    "5. 마을로 돌아가기\n"
-  ],
-  "RestaurantBackGround": [
-    "\n",
-    "여관 주인 앞 바 테이블에 앉았다.\n",
-    "\n"
-  ],
+
+
   "SmithBackGround": [
     "\n",
     "용암의 열기가 느껴지는 대장간이다.\n",
     "철이 부딪히는 소리가 반복적으로 들려온다.\n",
     "\n",
-    "대장장이 : 도움이 필요한가?\n",
-    "\n"
+    "대장장이 : 도움이 필요한가?\n"
   ],
   "BsmithCannotDialog": [
     "\n",
     "대장장이 : 내 능력으로는 더 이상 강화가 불가능하네\n"
   ],
-  "SmithUpgradeMenu": [
-    "1. 무기 강화 \n",
-    "2. 방어구 강화\n",
-    "3. 마을로 돌아가기\n"
-  ],
-  "SmithSwordUpgradeDialog" : [
+  "SmithUpgradeMenu1": [
+    "\n",
+    "1. 무기 강화 / 가격 : "],
+  "SmithUpgradeMenu2": [
+    " Gold\n",
+    "2. 방어구 강화 / 가격 : "],
+  "SmithUpgradeMenu3": [
+    " Gold\n",
+    "3. 마을로 돌아가기\n"],
+  "SmithSwordUpgradeDialog": [
+    "\n",
     "강화가 완료되었습니다.\n",
     "====================\n",
     "현재 공격력 : "
   ],
-  "SmithArmorUpgradeDialog" : [
+  "SmithArmorUpgradeDialog": [
+    "\n",
     "강화가 완료되었습니다.\n",
     "====================\n",
     "현재 방어력 : "
   ],
-  "LineDialog" :["====================\n"],
-  "WarMenuDialog": [
-    "1. 공격하기\n",
-    "2. 막기\n",
-    "3. 도망가기\n"
-  ],
-  "MobEntranceDialog": ["이가 나타났다!\n"],
+  "SmithUpgradeDialog2": ["====================\n"],
+
+
 
   "DungeonMenuDialog": [
+    "\n",
     "1. 고블린 소굴\n",
     "2. 오크의 전초기지\n",
     "3. 나이트 엘프의 숲\n",
@@ -131,19 +154,37 @@
     "검이 빛나며 빛이 온몸을 감싼다...\n",
     "얼어붙은 설산의 동굴 속 리치왕 아서스 메네실이 서리한을 집어든다.\n"
   ],
+
+
+  "WarMenuDialog": [
+    "\n",
+    "1. 공격하기\n",
+    "2. 막기\n",
+    "3. 도망가기\n"
+  ],
+  "MobEntranceDialog": ["(이)가 나타났다!\n"],
+  "MobDeadDialog": ["(은)는 쓰러졌다!\n","\n"],
+
+
+  "AttackDialog1": ["(이)가 "],
+  "AttackDialog2": ["에게 "],
+  "AttackDialog3": ["만큼 데미지를 주었습니다.\n"],
+  "AttackDialog4": ["의 현재 HP : "],
+  "LichRunAwayDialog": ["리치왕의 앞에서는 도망칠 수 없습니다.\n"],
   "EarnGold": ["골드를 획득하였습니다.\n"],
-  "BadEnding":[
+  "PrintGold": ["의 현재 Gold : "],
+  "BadEnding": [
     "은 픽 쓰러졌다.\n",
     "\n",
     "더 이상 일어설 힘도 나지 않고 눈은 점점 감긴다.\n",
     "누군가가 도움을 줬으면 했다.\n",
     "하지만 아무도 오지 않았다.\n",
-    "Bad Ending\n"
+    "Bad Ending"
   ],
   "TrueEnding" : [
     "세계는 평화를 되찾았고 우리의 수도이자 내 고향인 스톰윈드에 내려졌던 언데드의 저주도 해제되었고\n",
     "도시와 마을 곳곳에는 아이들의 웃음소리가 다시 들려오기 시작했다.\n",
     "이 비극이 두번다시 되는것을 막기위해 나는 설산으로 향했다.\n",
-    "True Ending\n"
+    "True Ending"
   ]
 }

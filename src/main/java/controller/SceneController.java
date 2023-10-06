@@ -48,7 +48,7 @@ public class SceneController {
             }
         } catch (NoSuchElementException e) {
             scanner.nextLine();
-            DialogReadService.getDialog("WrondDialog");
+            DialogReadService.getDialog("WrongDialog");
         }
         return num;
     }
@@ -61,7 +61,7 @@ public class SceneController {
 
             name = scanner.nextLine();
         } catch (NoSuchElementException e) {
-            DialogReadService.getDialog("WrondDialog");
+            DialogReadService.getDialog("WrongDialog");
         }
         return name;
     }

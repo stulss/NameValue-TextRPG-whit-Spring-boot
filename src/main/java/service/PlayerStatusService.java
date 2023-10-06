@@ -7,15 +7,11 @@ import repository.CharactorRepository;
 public class PlayerStatusService {
 
     private CharactorRepository charactorRepository = null;
-    private WeaponService weaponService = null;
-    private PlayerBattleService playerBattleService = null;
 
     public PlayerStatusService(){
         charactorRepository = new CharactorRepository();
         charactorRepository.createTable();
         charactorRepository.initialize();
-
-
     }
 
     // ----------------------PlayerStatus------------------------------
@@ -58,14 +54,11 @@ public class PlayerStatusService {
     public void printStatus(){
         Charactor user = findById(1L);
         System.out.println("===========정보창============");
-        // System.out.println("ID : " + user.getId());
         System.out.println("이름 : " + user.getName());
         System.out.println("체력 : " + user.getHp() + " / " + user.getMaxHp());
         System.out.println("공격력 : " + user.getAtk());
         System.out.println("방어력 : " + user.getDef());
         System.out.println("골드 : " + user.getGold());
-        // System.out.println("검 레벨 : " + user.getSwordLv());
-        // System.out.println("갑옷 레벨 : " + user.getArmorLv());
         System.out.println("=============================");
         System.out.println();
     }
