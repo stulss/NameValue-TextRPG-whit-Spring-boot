@@ -68,14 +68,14 @@ public class SceneController {
 
     public void sceneSelect(){
         int choice = 1;
-        gameController.gameStart();
+        gameController.GameStory();
         while (true){
             switch (choice){
                 case 1:
-                    choice = inVillageController.village();
+                    choice = inVillageController.selective();
                     break;
                 case 2:
-                    choice = inVillageController.pub();
+                    choice = inVillageController.Pub();
                     break;
                 case 3:
                     choice = weaponController.SmithMenu();
