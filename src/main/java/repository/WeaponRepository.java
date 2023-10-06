@@ -27,7 +27,7 @@ public class WeaponRepository {
                 "gear INT NOT NULL," +
                 "gold INT NOT NULL," +
                 "itemId INT NOT NULL," +
-                "lv INT ARRAY NOT NULL)";
+                "lv INT NOT NULL)";
         try {
             try (PreparedStatement statement = connection.prepareStatement(tableSQL)) {
                 statement.execute();
@@ -42,12 +42,12 @@ public class WeaponRepository {
         try {
             String insertSQL = "INSERT INTO Weapon (gear, gold, itemId, lv)" +
                     "VALUES" +
-                    "(4, 50, 0, 1)" +
-                    "(6, 100, 0, 2)" +
-                    "(8, 150, 0, 3)" +
-                    "(1, 30, 1, 1)" +
-                    "(2, 60, 1, 2)" +
-                    "(3, 90, 1, 3)";
+                    "(4, -50, 0, 1)," +
+                    "(6, -100, 0, 2)," +
+                    "(8, -150, 0, 3)," +
+                    "(1, -30, 1, 1)," +
+                    "(2, -60, 1, 2)," +
+                    "(3, -90, 1, 3)";
             PreparedStatement insertStatement = connection.prepareStatement(insertSQL);
             insertStatement.execute();
             insertStatement.close();
