@@ -63,7 +63,7 @@ public class CharactorRepository {
         try {
             String insertSQL = "INSERT INTO Charactor (name, maxHp, hp, atk, def, speed, gold, swordLv, armorLv) " +
                     "VALUES " +
-                    "('',30,30,2,0,10,1000,0,0)," +
+                    "('',30,30,2,0,10,0,0,0)," +
                     "('',0,0,0,0,0,0,0,0) ";
             PreparedStatement insertStatement = connection.prepareStatement(insertSQL);
             insertStatement.execute();
