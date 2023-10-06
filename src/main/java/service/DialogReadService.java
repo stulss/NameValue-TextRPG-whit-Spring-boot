@@ -12,8 +12,7 @@ import java.util.Map;
 public class DialogReadService {
     public static void getDialog(String key) {
         try{
-            //File file = new File("C:\\Users\\G\\Desktop\\NameValue_TextRPG_Spring_Pakage_Structure\\src\\main\\java\\Dialog.json");
-            File file = new File("C:\\Users\\G\\Desktop\\nameValue_정보\\TextRPG_ver.2\\src\\main\\resources\\Dialog.json");
+            File file = new File("C:\\Users\\G\\Desktop\\NameValue_TextRPG_Spring_Pakage_Structure\\src\\main\\java\\Dialog.json");
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, String[]> dialog = objectMapper.readValue(file, new TypeReference<>() {});
             if (dialog != null) {
