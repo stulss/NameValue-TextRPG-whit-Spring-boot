@@ -7,16 +7,19 @@ import service.PlayerStatusService;
 import service.WeaponService;
 
 public class WeaponController {
+    private InVillageController inVillageController = null;
     private WeaponService weaponService = null;
     private PlayerStatusService playerStatusService = null;
     public WeaponController(PlayerStatusService playerStatusService,WeaponService weaponService) {
         this.playerStatusService = playerStatusService;
         this.weaponService = weaponService;
+        inVillageController = new InVillageController();
     }
 
     public void SmithMenu() {
         String smithControllerDialog = DialogReadService.getDialog("SmithBackGround");
         String smithMenuDialog = DialogReadService.getDialog("SmithUpgradeMenu");
+        String wrongMenuDialog = DialogReadService.getDialog("WrondDialog");
         CharactorDto charactorDto = new CharactorDto(playerStatusService.findById(1L));
         switch (SceneController.scan()) {
             case 1: {
@@ -26,14 +29,10 @@ public class WeaponController {
                 weaponService.UpgradeArmor(charactorDto);
                 break;
             case 3:
-                inVillageController.selective();
+
                 break;
             default:
-                smithControllerDialog = DialogReadService.getDialog("WrongDialog");
                 SmithMenu();
-        }
-        if (smithControllerDialog != null) {
-            System.out.println("키 'GameStoryMenu' 가 해당 JSON file에 있지 않습니다.");
         }
     }
 }
