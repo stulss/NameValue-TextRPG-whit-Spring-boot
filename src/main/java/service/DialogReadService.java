@@ -1,19 +1,29 @@
 package service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Map;
 
 public class DialogReadService {
-
-    private String getDialog(String key) {
+    public static String getDialog(String key) {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            Map<String, String> dialogMap =
-                    mapper.readValue(Paths.get("../Dialog.json").toFile(), Map.class);
-            return dialogMap.get(key);
+            Map<String, Object> dialogMap =
+                    mapper.readValue(Paths.get("C:\\Users\\G\\Desktop\\NameValue_TextRPG_Spring_Pakage_Structure\\src\\main\\java\\Dialog.json").toFile(), Map.class);
+            Object value = dialogMap.get(key);
+
+            if (value instanceof List<?>) {
+                // If the value is a list, join all items into a single string without brackets and commas.
+                return String.join("\n", (List<String>) value);
+            } else {
+                return value != null ? value.toString() : null;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -21,7 +31,7 @@ public class DialogReadService {
     }
 
     private void printDialog(String dialogKey) {
-        String dialog = DialogReadService.getDialog(dialogKey);
+        String dialog = getDialog(dialogKey);
 
         if (dialog != null) {
             System.out.println(dialog);
@@ -31,87 +41,90 @@ public class DialogReadService {
         }
     }
 
-    public void titleDialog() { String dialogKey = "TitleDialog"; }
+
+    public void titleDialog() { printDialog("TitleDialog"); }
 
     public void inputName() {
-        String dialogKey = "InputName";
+        printDialog("InputName");
     }
 
     public void wrongDialog() {
-        String dialogKey = "WrongDialog";
+        printDialog("WrongDialog");
     }
     public void selectMenuDialog() {
-        String dialogKey = "SelectMenuDialog";
+        printDialog("SelectMenuDialog");
     }
     public void errorDelayDialog() {
-        String dialogKey = "ErrorDelayDialog";
+        printDialog("ErrorDelayDialog");
     }
     public void gameStoryDialog() {
-        String dialogKey = "GameStoryDialog";
+        printDialog("GameStoryDialog");
     }
     public void gameStoryMenu() {
-        String dialogKey = "GameStoryMenu";
+        printDialog("GameStoryMenu");
     }
     public void poorDialog() {
-        String dialogKey = "PoorDialog";
+        printDialog("PoorDialog");
     }
     public void villageBackGround() {
-        String dialogKey = "VillageBackGround";
+        printDialog("VillageBackGround");
     }
     public void villageMenuDialog() {
-        String dialogKey = "VillageMenuDialog";
+        printDialog("VillageMenuDialog");
     }
     public void pubBackGround() {
-        String dialogKey = "PubBackGround";
+        printDialog("PubBackGround");
     }
     public void pubMenuDialog() {
-        String dialogKey = "PubMenuDialog";
+        printDialog("PubMenuDialog");
     }
     public void restaurantBackGround() {
-        String dialogKey = "RestaurantBackGround";
+        printDialog("RestaurantBackGround");
     }
     public void smithBackGround() {
-        String dialogKey = "SmithBackGround";
+        printDialog("SmithBackGround");
     }
     public void bSmithCannotDialog() {
-        String dialogKey = "BsmithCannotDialog";
+        printDialog("BsmithCannotDialog");
     }
     public void smithUpgradeMenu() {
-        String dialogKey = "SmithUpgradeMenu";
+        printDialog( "SmithUpgradeMenu");
     }
     public void smithSwordUpgradeDialog() {
-        String dialogKey = "SmithSwordUpgradeDialog";
+        printDialog("SmithSwordUpgradeDialog");
     }
     public void smithArmorUpgradeDialog() {
-        String dialogKey = "SmithArmorUpgradeDialog";
+        printDialog( "SmithArmorUpgradeDialog");
     }
     public void lineDialog() {
-        String dialogKey = "LineDialog";
+        printDialog("LineDialog");
     }
     public void warMenuDialog() {
-        String dialogKey = "WarMenuDialog";
+        printDialog("WarMenuDialog");
     }
     public void mobEntranceDialog() {
-        String dialogKey = "MobEntranceDialog";
+        printDialog("MobEntranceDialog");
     }
     public void dungeonMenuDialog() {
-        String dialogKey = "DungeonMenuDialog";
+        printDialog("DungeonMenuDialog");
     }
     public void enterGoblinDialog() {
-        String dialogKey = "EnterGoblinDialog";
+        printDialog("EnterGoblinDialog");
     }
     public void enterOrkDialog() {
-        String dialogKey = "EnterOrkDialog";
+        printDialog("EnterOrkDialog");
     }
     public void enterNightElf() {
-        String dialogKey = "EnterNightElf";
+        printDialog("EnterNightElf");
     }
+    public void enterSnowMountainDialog() { printDialog("EnterSnowMountainDialog");}
     public void earnGold() {
-        String dialogKey = "EarnGold";
+        printDialog("EarnGold");
     }
     public void badEnding() {
-        String dialogKey = "BadEnding";
+        printDialog( "BadEnding");
     }
     public void trueEnding() {
-        String dialogKey = "TrueEnding";
+        printDialog("TrueEnding");
+    }
 }

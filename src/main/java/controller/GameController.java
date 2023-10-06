@@ -8,7 +8,7 @@ public class GameController {
     private InVillageController inVillageController = null;
 
     public GameController(PlayerStatusService playerStatusService) {
-        inVillageController = new InVillageController();
+        inVillageController = new InVillageController(playerStatusService);
     }
 
     private DialogReadService dialogReadService = new DialogReadService();

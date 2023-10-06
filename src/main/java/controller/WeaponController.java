@@ -13,13 +13,13 @@ public class WeaponController {
     public WeaponController(PlayerStatusService playerStatusService,WeaponService weaponService) {
         this.playerStatusService = playerStatusService;
         this.weaponService = weaponService;
-        inVillageController = new InVillageController();
+        inVillageController = new InVillageController(playerStatusService);
     }
 
     public void SmithMenu() {
-        String smithControllerDialog = DialogReadService.getDialog("SmithBackGround");
-        String smithMenuDialog = DialogReadService.getDialog("SmithUpgradeMenu");
-        String wrongMenuDialog = DialogReadService.getDialog("WrondDialog");
+        DialogReadService.getDialog("SmithBackGround");
+        DialogReadService.getDialog("SmithUpgradeMenu");
+        DialogReadService.getDialog("WrongDialog");
         CharactorDto charactorDto = new CharactorDto(playerStatusService.findById(1L));
         switch (SceneController.scan()) {
             case 1: {
