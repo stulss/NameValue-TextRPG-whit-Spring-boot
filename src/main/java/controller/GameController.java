@@ -7,7 +7,7 @@ import service.WeaponService;
 public class GameController {
     private InVillageController inVillageController = null;
 
-    public GameController(PlayerStatusService playerStatusService, WeaponService weaponService) {
+    public GameController(PlayerStatusService playerStatusService) {
         inVillageController = new InVillageController();
     }
 
