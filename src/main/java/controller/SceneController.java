@@ -68,8 +68,8 @@ public class SceneController {
 
     public void sceneSelect(){
         int choice = 1;
+        gameController.GameStory();
         while (true){
-            gameController.GameStory();
             switch (choice){
                 case 1:
                     choice = inVillageController.selective();
