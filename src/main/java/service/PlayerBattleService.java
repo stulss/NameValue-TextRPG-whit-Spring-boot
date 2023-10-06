@@ -12,6 +12,7 @@ import java.util.List;
 
 public class PlayerBattleService {
 
+    DialogReadService dialogReadService = new DialogReadService();
     private PlayerStatusService playerStatusService = null;
     private List<Integer> monsters;
     private int dungeonGold;
@@ -67,7 +68,7 @@ public class PlayerBattleService {
         if (playerStatusService.findById(1L).getHp() == 0) {
             System.out.println(playerStatusService.findById(1L).getName()+"의 현재 HP는 0");
             System.out.print(playerStatusService.findById(1L).getName());
-            DialogReadService.getDialog("BadEnding");
+            dialogReadService.badEnding();
             System.exit(0);
         } else if (playerStatusService.findById(2L).getHp() > 0) {
             return 5;
@@ -102,17 +103,18 @@ public class PlayerBattleService {
     public int nextMonster() {
         if (monsters.isEmpty()) {
             if (playerStatusService.findById(2L).getName().equals("리치왕 아서스 메놀드")) {
-                DialogReadService.getDialog("TrueEnding");
+                dialogReadService.trueEnding();
+                //DialogReadService.getDialog("TrueEnding");
                 System.exit(0);
             }
             System.out.print(dungeonGold);
-            DialogReadService.getDialog("EarnGold");
+            dialogReadService.earnGold();
             playerStatusService.GoldChange(new CharactorDto(playerStatusService.findById(1L)), dungeonGold);
             return 1;
         }
         updateMonster(monsters.get(0));
         System.out.print(playerStatusService.findById(2L).getName());
-        DialogReadService.getDialog("MobEntranceDialog");
+        dialogReadService.mobEntranceDialog();
         monsters.remove(0);
         return 5;
 
