@@ -16,7 +16,7 @@ public class WeaponController {
         inVillageController = new InVillageController(playerStatusService);
     }
 
-    public void SmithMenu() {
+    public int SmithMenu() {
         DialogReadService.getDialog("SmithBackGround");
         DialogReadService.getDialog("SmithUpgradeMenu");
         DialogReadService.getDialog("WrongDialog");
@@ -34,5 +34,6 @@ public class WeaponController {
             default:
                 SmithMenu();
         }
+        return 3;
     }
 }
