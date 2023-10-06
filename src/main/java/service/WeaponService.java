@@ -20,7 +20,7 @@ public class WeaponService {
     public void UpgradeSword(CharactorDto charactorDto) {
         Weapon weapon = weaponRepository.findByItemIdLv(0, charactorDto.toEntity().getSwordLv() + 1);
         if (weapon == null) {
-            dialogReadService.titleDialog();
+            dialogReadService.bSmithCannotDialog();
         } else if (playerStatusService.GoldChange(charactorDto,weapon.getGold())) {
             CharactorDto temp = new CharactorDto(charactorDto.toEntity());
             temp.setAtk(weapon.getGear());

@@ -10,121 +10,135 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 public class DialogReadService {
-    public static String getDialog(String key) {
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            Map<String, Object> dialogMap =
-                    mapper.readValue(Paths.get("C:\\Users\\G\\Desktop\\NameValue_TextRPG_Spring_Pakage_Structure\\src\\main\\java\\Dialog.json").toFile(), Map.class);
-            Object value = dialogMap.get(key);
-
-            if (value instanceof List<?>) {
-                // If the value is a list, join all items into a single string without brackets and commas.
-                return String.join("\n", (List<String>) value);
-            } else {
-                return value != null ? value.toString() : null;
+    public static void getDialog(String key) {
+        try{
+            File file = new File("C:\\Users\\G\\Desktop\\NameValue_TextRPG_Spring_Pakage_Structure\\src\\main\\java\\Dialog.json");
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, String[]> dialog = objectMapper.readValue(file, new TypeReference<>() {});
+            if (dialog != null) {
+                for (String e : dialog.get(key)){
+                    System.out.print(e);
+                }
             }
-        } catch (IOException e) {
+            else {
+                System.out.println("해당 키에 대한 다이얼로그가 JSON 파일에 없습니다: " + key);
+            }
+            
+        }catch (IOException e){
             e.printStackTrace();
         }
-        return null;
     }
 
-    private void printDialog(String dialogKey) {
-        String dialog = getDialog(dialogKey);
+//    private static String getDialog(String key) {
+//        ObjectMapper mapper = new ObjectMapper();
+//
+//        try {
+//            Map<String, Object> dialogMap =
+//                    mapper.readValue(Paths.get("C:\\Users\\G\\Desktop\\NameValue_TextRPG_Spring_Pakage_Structure\\src\\main\\java\\Dialog.json").toFile(), Map.class);
+//            Object value = dialogMap.get(key);
+//
+//            if (value instanceof List<?>) {
+//                // If the value is a list, join all items into a single string without brackets and commas.
+//                return String.join("\n", (List<String>) value);
+//            } else {
+//                return value != null ? value.toString() : null;
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+//
 
-        if (dialog != null) {
-            System.out.println(dialog);
-        }
-        else {
-            System.out.println("해당 키에 대한 다이얼로그가 JSON 파일에 없습니다: " + dialogKey);
-        }
+
+    public void titleDialog() {
+        getDialog("TitleDialog"); 
     }
-
-
-    public void titleDialog() { printDialog("TitleDialog"); }
 
     public void inputName() {
-        printDialog("InputName");
+        getDialog("InputName");
     }
 
     public void wrongDialog() {
-        printDialog("WrongDialog");
+        getDialog("WrongDialog");
     }
     public void selectMenuDialog() {
-        printDialog("SelectMenuDialog");
+        getDialog("SelectMenuDialog");
     }
     public void errorDelayDialog() {
-        printDialog("ErrorDelayDialog");
+        getDialog("ErrorDelayDialog");
     }
     public void gameStoryDialog() {
-        printDialog("GameStoryDialog");
+        getDialog("GameStoryDialog");
     }
     public void gameStoryMenu() {
-        printDialog("GameStoryMenu");
+        getDialog("GameStoryMenu");
     }
     public void poorDialog() {
-        printDialog("PoorDialog");
+        getDialog("PoorDialog");
     }
     public void villageBackGround() {
-        printDialog("VillageBackGround");
+        getDialog("VillageBackGround");
     }
     public void villageMenuDialog() {
-        printDialog("VillageMenuDialog");
+        getDialog("VillageMenuDialog");
     }
     public void pubBackGround() {
-        printDialog("PubBackGround");
+        getDialog("PubBackGround");
     }
     public void pubMenuDialog() {
-        printDialog("PubMenuDialog");
+        getDialog("PubMenuDialog");
     }
     public void restaurantBackGround() {
-        printDialog("RestaurantBackGround");
+        getDialog("RestaurantBackGround");
     }
     public void smithBackGround() {
-        printDialog("SmithBackGround");
+        getDialog("SmithBackGround");
     }
     public void bSmithCannotDialog() {
-        printDialog("BsmithCannotDialog");
+        getDialog("BsmithCannotDialog");
     }
     public void smithUpgradeMenu() {
-        printDialog( "SmithUpgradeMenu");
+        getDialog( "SmithUpgradeMenu");
     }
     public void smithSwordUpgradeDialog() {
-        printDialog("SmithSwordUpgradeDialog");
+        getDialog("SmithSwordUpgradeDialog");
     }
     public void smithArmorUpgradeDialog() {
-        printDialog( "SmithArmorUpgradeDialog");
+        getDialog( "SmithArmorUpgradeDialog");
     }
     public void lineDialog() {
-        printDialog("LineDialog");
+        getDialog("LineDialog");
     }
     public void warMenuDialog() {
-        printDialog("WarMenuDialog");
+        getDialog("WarMenuDialog");
     }
     public void mobEntranceDialog() {
-        printDialog("MobEntranceDialog");
+        getDialog("MobEntranceDialog");
     }
     public void dungeonMenuDialog() {
-        printDialog("DungeonMenuDialog");
+        getDialog("DungeonMenuDialog");
     }
     public void enterGoblinDialog() {
-        printDialog("EnterGoblinDialog");
+        getDialog("EnterGoblinDialog");
     }
     public void enterOrkDialog() {
-        printDialog("EnterOrkDialog");
+        getDialog("EnterOrkDialog");
     }
     public void enterNightElf() {
-        printDialog("EnterNightElf");
+        getDialog("EnterNightElf");
     }
-    public void enterSnowMountainDialog() { printDialog("EnterSnowMountainDialog");}
-    public void earnGold() {
-        printDialog("EarnGold");
+    public void enterSnowMountainDialog() {
+        getDialog("EnterSnowMountainDialog");
+    }
+    public void earnGold(){
+        getDialog("EarnGold");
     }
     public void badEnding() {
-        printDialog( "BadEnding");
+        getDialog( "BadEnding");
     }
     public void trueEnding() {
-        printDialog("TrueEnding");
+        getDialog("TrueEnding");
     }
+
 }

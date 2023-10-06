@@ -13,7 +13,6 @@ public class InVillageController {
     public int selective(){
         dialogReadService.villageBackGround();
         dialogReadService.villageMenuDialog();
-        dialogReadService.selectMenuDialog();
 
         switch(SceneController.scan()){
             case 1:
@@ -30,7 +29,6 @@ public class InVillageController {
     public int Pub(){
         dialogReadService.pubBackGround();
         dialogReadService.pubMenuDialog();
-        dialogReadService.selectMenuDialog();
 
         CharactorDto player = new CharactorDto(playerStatusService.findById(1L));
 
