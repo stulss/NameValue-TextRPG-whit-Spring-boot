@@ -24,16 +24,16 @@ public class CharactorRepository {
 
     // -------------- <Create> --------------------------------
     public void createTable(){
-        String tableSQL = "CREATE TABLE IF NOT EXISTS User (" +
-                "id INT AUTO_INCREMENT PRIMARY KEY," +
+        String tableSQL = "CREATE TABLE IF NOT EXISTS Charactor (" +
+                "id LONG AUTO_INCREMENT PRIMARY KEY," +
                 "name VARCHAR(255) NOT NULL," +
                 "maxHp INT NOT NULL," +
                 "hp INT NOT NULL," +
                 "atk INT NOT NULL," +
                 "def INT NOT NULL," +
                 "speed INT NOT NULL," +
-                "gold INT NOT NULL)" +
-                "swordLv INT NOT NULL)" +
+                "gold INT NOT NULL," +
+                "swordLv INT NOT NULL," +
                 "armorLv INT NOT NULL)";
         try {
             try (PreparedStatement statement = connection.prepareStatement(tableSQL)) {
@@ -54,6 +54,20 @@ public class CharactorRepository {
 
                 insertStatement.execute();
                 insertStatement.close();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void initialize(){
+        try {
+            String insertSQL = "INSERT INTO Charactor (name, maxHp, hp, atk, def, speed, gold, swordLv, armorLv) " +
+                    "VALUES " +
+                    "('',30,30,2,0,10,1000,0,0)," +
+                    "('',0,0,0,0,0,0,0,0) ";
+            PreparedStatement insertStatement = connection.prepareStatement(insertSQL);
+            insertStatement.execute();
+            insertStatement.close();
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,11 +149,4 @@ public class CharactorRepository {
             e.printStackTrace();
         }
     }
-
-
-
-    // -------------- <Delete> --------------------------------
-
-
-
 }
