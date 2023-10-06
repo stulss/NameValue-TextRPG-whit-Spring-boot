@@ -29,7 +29,7 @@ public class BattleController {
             case 2: {
                 CharactorDto player = new CharactorDto(playerStatusService.findById(1L));
                 CharactorDto monster = new CharactorDto(playerStatusService.findById(2L));
-                playerBattleService.deffence(player, monster);
+                playerBattleService.turn(monster,player,playerBattleService.deffence(monster,player));
             }
             return playerBattleService.dead();
             case 3:
@@ -75,7 +75,7 @@ public class BattleController {
                 DialogReadService.getDialog("WrondDialog");
                 break;
         }
-        return 5;
+        return 6;
     }
 
 
