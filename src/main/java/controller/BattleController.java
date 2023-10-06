@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class BattleController {
 
+    DialogReadService dialogReadService = new DialogReadService();
     private PlayerBattleService playerBattleService = null;
     private PlayerStatusService playerStatusService = null;
 
@@ -19,9 +20,8 @@ public class BattleController {
     }
 
     public int war() {
-        DialogReadService.getDialog("WarMenuDialog");
-        DialogReadService.getDialog("SelectMenuDialog");
-
+        dialogReadService.warMenuDialog();
+        dialogReadService.selectMenuDialog();
         switch (SceneController.scan()) {
             case 1: {
                 CharactorDto player = new CharactorDto(playerStatusService.findById(1L));
@@ -39,34 +39,34 @@ public class BattleController {
                 playerBattleService.runAway();
                 break;
             default:
-                DialogReadService.getDialog("WrondDialog");
+                dialogReadService.wrongDialog();
                 break;
         }
         return 5;
     }
 
     public int dungeon() {
-        DialogReadService.getDialog("DungeonMenuDialog");
-        DialogReadService.getDialog("SelectMenuDialog");
+        dialogReadService.dungeonMenuDialog();
+        dialogReadService.selectMenuDialog();
 
         switch (SceneController.scan()) {
             case 1: {
-                DialogReadService.getDialog("EnterGoblinDialog");
+                dialogReadService.enterGoblinDialog();
                 playerBattleService.dungeonMaker(new int[] {0,0,1},30);
             }
             break;
             case 2: {
-                DialogReadService.getDialog("EnterOrkDialog");
+                dialogReadService.enterOrkDialog();
                 playerBattleService.dungeonMaker(new int[] {2,2,3},45);
             }
             break;
             case 3: {
-                DialogReadService.getDialog("EnterNightElf");
+                dialogReadService.enterNightElf();
                 playerBattleService.dungeonMaker(new int[] {4,4,5,6},60);
             }
             break;
             case 4: {
-                DialogReadService.getDialog("EnterSnowMountainDialog");
+                dialogReadService.enterSnowMountainDialog();
                 playerBattleService.dungeonMaker(new int[] {7},0);
                 CharactorDto player = new CharactorDto(playerStatusService.findById(1L));
                 player.setMaxHp(80);
@@ -77,10 +77,12 @@ public class BattleController {
             case 5:
                 return 1;
             default:
-                DialogReadService.getDialog("WrondDialog");
+                dialogReadService.wrongDialog();
                 break;
         }
         return 5;
     }
+
+
 }
 
