@@ -5,19 +5,15 @@ import service.DialogReadService;
 import service.PlayerStatusService;
 
 public class InVillageController {
-
     private PlayerStatusService playerStatusService;
-
-    
-
+    DialogReadService dialogReadService = new DialogReadService();
     public InVillageController(PlayerStatusService playerStatusService){
         this.playerStatusService = playerStatusService;
     }
-
     public int selective(){
-        DialogReadService.getDialog("VillageBackGround");
-        DialogReadService.getDialog("VillageMenuDialog");
-        DialogReadService.getDialog("SelectMenuDialog");
+        dialogReadService.villageBackGround();
+        dialogReadService.villageMenuDialog();
+        dialogReadService.selectMenuDialog();
 
         switch(SceneController.scan()){
             case 1:
@@ -27,15 +23,14 @@ public class InVillageController {
             case 3:
                 return 4;
             default:
-                DialogReadService.getDialog("WrondDialog");
+                dialogReadService.wrongDialog();
                 return 1;
         }
     }
-
     public int Pub(){
-        DialogReadService.getDialog("PubBackGround");
-        DialogReadService.getDialog("PubMenuDialog");
-        DialogReadService.getDialog("SelectMenuDialog");
+        dialogReadService.pubBackGround();
+        dialogReadService.pubMenuDialog();
+        dialogReadService.selectMenuDialog();
 
         CharactorDto player = new CharactorDto(playerStatusService.findById(1L));
 
@@ -61,12 +56,11 @@ public class InVillageController {
                 }
                 return 2;
             case 5:
-                DialogReadService.getDialog("GoBackTownDialog");
+                System.out.println("마을로 돌아갑니다");
                 return 1;
             default:
-                DialogReadService.getDialog("WrondDialog");
+                dialogReadService.wrongDialog();
                 return 2;
         }
     }
-
 }
